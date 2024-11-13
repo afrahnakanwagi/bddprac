@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e8f5e9;
+        }
+
+        /* Container for the login form */
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 128, 0, 0.2);
+            width: 300px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .login-container:hover {
+            box-shadow: 0 8px 20px rgba(0, 128, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #4a4a4a;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #66bb6a;
+            outline: none;
+        }
+
+        /* Button styling */
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .login-button:hover {
+            background-color: #1b5e20;
+            transform: scale(1.05);
+        }
+
+        /* Error message */
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <div id="usernameError" class="error">Please enter a valid username.</div>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <div id="passwordError" class="error">Please enter your password.</div>
+
+            <button type="button" class="login-button" onclick="validateAndRedirect()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function validateAndRedirect() {
+            // Clear any existing error messages
+            document.getElementById("usernameError").style.display = "none";
+            document.getElementById("passwordError").style.display = "none";
+
+            // Get input values
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            let valid = true;
+
+            // Simple validation checks
+            if (username === "") {
+                document.getElementById("usernameError").style.display = "block";
+                valid = false;
+            }
+            if (password === "") {
+                document.getElementById("passwordError").style.display = "block";
+                valid = false;
+            }
+
+            // Redirect to index page if valid
+            if (valid) {
+                alert("Login successful! Redirecting to index page...");
+                window.location.href = "index.html";  // Change to your actual index page path
+            }
+        }
+    </script>
+
+</body>
+</html>
