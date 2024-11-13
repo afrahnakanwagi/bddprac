@@ -16,7 +16,7 @@
             background-color: #e8f5e9;
         }
 
-        /* Container for the login form */
+        /* Container for the form */
         .login-container {
             background-color: white;
             padding: 30px;
@@ -46,7 +46,8 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -57,13 +58,15 @@
         }
 
         input[type="text"]:focus,
-        input[type="password"]:focus {
+        input[type="password"]:focus,
+        input[type="email"]:focus {
             border-color: #66bb6a;
             outline: none;
         }
 
         /* Button styling */
-        .login-button {
+        .login-button,
+        .signup-button {
             width: 100%;
             padding: 10px;
             background-color: #2e7d32;
@@ -76,7 +79,8 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .login-button:hover {
+        .login-button:hover,
+        .signup-button:hover {
             background-color: #1b5e20;
             transform: scale(1.05);
         }
@@ -95,6 +99,10 @@
     <div class="login-container">
         <h2>Login</h2>
         <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <div id="emailError" class="error">Please enter a valid email.</div>
+
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>
             <div id="usernameError" class="error">Please enter a valid username.</div>
@@ -104,25 +112,34 @@
             <div id="passwordError" class="error">Please enter your password.</div>
 
             <button type="button" class="login-button" onclick="validateAndRedirect()">Login</button>
+            <button type="button" class="signup-button" onclick="redirectToSignup()">Sign Up</button>
         </form>
     </div>
 
     <script>
         function validateAndRedirect() {
             // Clear any existing error messages
+            document.getElementById("emailError").style.display = "none";
             document.getElementById("usernameError").style.display = "none";
             document.getElementById("passwordError").style.display = "none";
 
             // Get input values
+            const email = document.getElementById("email").value.trim();
             const username = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value.trim();
             let valid = true;
 
-            // Simple validation checks
+            // Email validation
+            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById("emailError").style.display = "block";
+                valid = false;
+            }
+            // Username validation
             if (username === "") {
                 document.getElementById("usernameError").style.display = "block";
                 valid = false;
             }
+            // Password validation
             if (password === "") {
                 document.getElementById("passwordError").style.display = "block";
                 valid = false;
@@ -133,6 +150,10 @@
                 alert("Login successful! Redirecting to index page...");
                 window.location.href = "index.html";  // Change to your actual index page path
             }
+        }
+
+        function redirectToSignup() {
+            window.location.href = "signup.html";  // Change to your actual signup page path
         }
     </script>
 
